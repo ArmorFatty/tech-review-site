@@ -1,4 +1,16 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Header scroll effect
+    const header = document.querySelector('header');
+    const scrollThreshold = 50; // Adjust this value to change when the effect triggers
+
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > scrollThreshold) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    });
+
     // Mobile menu functionality
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
     const navLinks = document.querySelector('.nav-links');
