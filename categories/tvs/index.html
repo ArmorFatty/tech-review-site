@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TV Reviews - TechReview Hub</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="../../index.html">TechReview Hub</a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="../../index.html">Home</a></li>
+                <li><a href="#">Reviews</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-trigger">Categories</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="../laptops">Laptops</a></li>
+                        <li><a href="../tvs" class="active">TVs</a></li>
+                        <li><a href="../soundbars">Soundbars</a></li>
+                        <li><a href="../monitors">Monitors</a></li>
+                        <li><a href="../headphones">Headphones</a></li>
+                        <li><a href="../gaming">Gaming</a></li>
+                        <li><a href="../smart-home">Smart Home</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">About</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="category-page">
+        <section class="category-header">
+            <div class="category-content">
+                <h1>TV Reviews</h1>
+                <p>Expert reviews of the latest and greatest televisions, from budget-friendly options to premium OLED displays.</p>
+            </div>
+        </section>
+
+        <section class="category-filters">
+            <div class="filter-group">
+                <button class="filter-button active">All</button>
+                <button class="filter-button">OLED</button>
+                <button class="filter-button">QLED</button>
+                <button class="filter-button">Mini LED</button>
+                <button class="filter-button">Budget</button>
+            </div>
+        </section>
+
+        <section class="category-grid">
+            <article class="review-card">
+                <div class="card-badge">Editor's Choice</div>
+                <img src="https://via.placeholder.com/600x400" alt="TCL QM6K TV">
+                <div class="review-content">
+                    <div class="review-category">Mini LED</div>
+                    <h3>TCL QM6K TV Review</h3>
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        <span class="rating-text">4.5/5</span>
+                    </div>
+                    <p>Experience stunning picture quality with Mini LED technology and Google TV integration.</p>
+                    <div class="card-meta">
+                        <span class="publish-date"><i class="far fa-calendar"></i> Feb 24, 2025</span>
+                        <span class="read-time"><i class="far fa-clock"></i> 10 min read</span>
+                    </div>
+                    <a href="tcl-qm6k.html" class="read-more">Read Full Review <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </article>
+
+            <article class="review-card coming-soon">
+                <img src="https://via.placeholder.com/600x400" alt="Samsung S95C OLED">
+                <div class="review-content">
+                    <div class="review-category">OLED</div>
+                    <h3>Samsung S95C OLED</h3>
+                    <div class="coming-soon-badge">
+                        <i class="fas fa-clock"></i>
+                        Review Coming Soon
+                    </div>
+                    <p>Samsung's latest QD-OLED TV promises unprecedented brightness and color accuracy.</p>
+                    <a href="#" class="read-more disabled">Coming Soon <i class="fas fa-clock"></i></a>
+                </div>
+            </article>
+
+            <article class="review-card coming-soon">
+                <img src="https://via.placeholder.com/600x400" alt="LG C4 OLED">
+                <div class="review-content">
+                    <div class="review-category">OLED</div>
+                    <h3>LG C4 OLED</h3>
+                    <div class="coming-soon-badge">
+                        <i class="fas fa-clock"></i>
+                        Review Coming Soon
+                    </div>
+                    <p>The next generation of LG's popular C-series OLED TVs with improved processing.</p>
+                    <a href="#" class="read-more disabled">Coming Soon <i class="fas fa-clock"></i></a>
+                </div>
+            </article>
+        </section>
+
+        <section class="category-newsletter">
+            <div class="newsletter-content">
+                <h2>Never Miss a TV Review</h2>
+                <p>Get notified when we publish new TV reviews and buying guides</p>
+                <form id="category-newsletter-form">
+                    <div class="form-group">
+                        <input type="email" placeholder="Enter your email address" required>
+                        <button type="submit">Subscribe <i class="fas fa-paper-plane"></i></button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>TechReview Hub</h3>
+                <p>Your trusted source for tech reviews</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 TechReview Hub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../../script.js"></script>
+</body>
+</html>
