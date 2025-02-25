@@ -1,4 +1,34 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Dropdown menu functionality
+    const dropdowns = document.querySelectorAll('.dropdown');
+    
+    dropdowns.forEach(dropdown => {
+        const trigger = dropdown.querySelector('.dropdown-trigger');
+        
+        trigger.addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            // Close other dropdowns
+            dropdowns.forEach(other => {
+                if (other !== dropdown && other.classList.contains('active')) {
+                    other.classList.remove('active');
+                }
+            });
+            
+            // Toggle current dropdown
+            dropdown.classList.toggle('active');
+        });
+    });
+
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.dropdown')) {
+            dropdowns.forEach(dropdown => {
+                dropdown.classList.remove('active');
+            });
+        }
+    });
+
     // Header scroll effect
     const header = document.querySelector('header');
     const scrollThreshold = 50; // Adjust this value to change when the effect triggers
