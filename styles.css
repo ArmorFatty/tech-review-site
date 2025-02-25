@@ -5,14 +5,12 @@
     --text-color: #2c3e50;
     --card-background: #ffffff;
     --accent-color: #556677;
-    --success-color: #10b981;
-    --warning-color: #f59e0b;
-    --error-color: #ef4444;
-    --gradient-start: #667788;
-    --gradient-end: #445566;
     --nav-background: rgba(255, 255, 255, 0.95);
+    --menu-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --transition-speed: 0.3s;
 }
 
+/* Base styles */
 * {
     margin: 0;
     padding: 0;
@@ -26,16 +24,16 @@ body {
     background-color: var(--background-color);
 }
 
+/* Header and Navigation */
 header {
     background: var(--nav-background);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--menu-shadow);
     position: fixed;
     width: 100%;
     top: 0;
     z-index: 1000;
-    transition: all 0.3s ease;
 }
 
 nav {
@@ -45,6 +43,7 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
 }
 
 .logo {
@@ -54,6 +53,30 @@ nav {
     text-decoration: none;
 }
 
+/* Mobile Menu Button */
+.mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    padding: 0.5rem;
+    cursor: pointer;
+    transition: color var(--transition-speed) ease;
+}
+
+.mobile-menu-btn:hover,
+.mobile-menu-btn:focus {
+    color: var(--secondary-color);
+    outline: none;
+}
+
+.mobile-menu-btn:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+/* Navigation Links */
 .nav-links {
     display: flex;
     align-items: center;
@@ -64,29 +87,156 @@ nav {
 .nav-links a {
     color: var(--text-color);
     text-decoration: none;
-    padding: 0.5rem 1rem;
-    transition: color 0.3s ease;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    padding: 0.5rem;
+    transition: color var(--transition-speed) ease;
 }
 
 .nav-links a:hover,
-.nav-links a.active {
+.nav-links a:focus {
     color: var(--primary-color);
 }
 
-.nav-links a.active {
-    font-weight: 600;
+/* Dropdown Styles */
+.dropdown {
+    position: relative;
 }
 
-main {
-    margin-top: 4rem;
-    padding: 2rem;
+.dropdown-trigger {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: none;
+    border: none;
+    color: var(--text-color);
+    font-size: inherit;
+    padding: 0.5rem;
+    cursor: pointer;
+    transition: color var(--transition-speed) ease;
 }
 
+.dropdown-trigger:hover,
+.dropdown-trigger:focus {
+    color: var(--primary-color);
+    outline: none;
+}
+
+.dropdown-trigger:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+.dropdown-trigger i {
+    transition: transform var(--transition-speed) ease;
+}
+
+.dropdown.active .dropdown-trigger i {
+    transform: rotate(180deg);
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: var(--nav-background);
+    min-width: 200px;
+    border-radius: 0.5rem;
+    box-shadow: var(--menu-shadow);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all var(--transition-speed) ease;
+    z-index: 1000;
+}
+
+.dropdown.active .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 0.75rem 1rem;
+    color: var(--text-color);
+    transition: all var(--transition-speed) ease;
+}
+
+.dropdown-menu a:hover,
+.dropdown-menu a:focus {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+/* Mobile Styles */
+@media screen and (max-width: 768px) {
+    .mobile-menu-btn {
+        display: block;
+    }
+
+    .nav-links {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--nav-background);
+        padding: 1rem;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.5rem;
+        box-shadow: var(--menu-shadow);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: all var(--transition-speed) ease;
+    }
+
+    .nav-links.active {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    .nav-links li {
+        width: 100%;
+    }
+
+    .nav-links a {
+        display: block;
+        padding: 0.75rem 1rem;
+    }
+
+    .dropdown-trigger {
+        width: 100%;
+        justify-content: space-between;
+        padding: 0.75rem 1rem;
+    }
+
+    .dropdown-menu {
+        position: static;
+        box-shadow: none;
+        background: transparent;
+        min-width: auto;
+        padding-left: 1.5rem;
+        transform: none;
+        transition: opacity var(--transition-speed) ease;
+    }
+
+    .dropdown-menu a {
+        padding: 0.5rem 1rem;
+    }
+
+    .dropdown-menu a:hover,
+    .dropdown-menu a:focus {
+        background-color: transparent;
+        color: var(--primary-color);
+    }
+}
+
+/* Hero Section */
 .hero {
     text-align: center;
     padding: 6rem 1rem;
-    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     color: white;
     border-radius: 0 0 2rem 2rem;
     margin-bottom: 4rem;
@@ -140,7 +290,7 @@ main {
     border-radius: 0.5rem;
     font-weight: 600;
     text-decoration: none;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
 }
 
 .cta-button:hover {
@@ -159,29 +309,7 @@ main {
     backdrop-filter: blur(10px);
 }
 
-.hero-stats {
-    display: flex;
-    justify-content: center;
-    gap: 4rem;
-    margin-top: 2rem;
-}
-
-.stat-item {
-    text-align: center;
-}
-
-.stat-number {
-    display: block;
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-}
-
-.stat-label {
-    font-size: 1rem;
-    opacity: 0.8;
-}
-
+/* Featured Reviews Section */
 .featured-reviews {
     max-width: 1200px;
     margin: 0 auto;
@@ -207,7 +335,7 @@ main {
     border-radius: 1rem;
     overflow: hidden;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
     position: relative;
 }
 
@@ -220,7 +348,7 @@ main {
     position: absolute;
     top: 1rem;
     right: 1rem;
-    background-color: var(--success-color);
+    background-color: var(--primary-color);
     color: white;
     padding: 0.5rem 1rem;
     border-radius: 2rem;
@@ -233,7 +361,7 @@ main {
     width: 100%;
     height: 240px;
     object-fit: cover;
-    transition: transform 0.3s ease;
+    transition: transform var(--transition-speed) ease;
 }
 
 .review-card:hover img {
@@ -293,15 +421,16 @@ main {
     text-decoration: none;
     border-radius: 0.5rem;
     font-weight: 500;
-    transition: background-color 0.3s ease;
+    transition: background-color var(--transition-speed) ease;
 }
 
 .read-more:hover {
     background-color: var(--secondary-color);
 }
 
+/* Newsletter Section */
 .newsletter {
-    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     border-radius: 2rem;
     padding: 4rem 2rem;
     margin: 4rem auto;
@@ -370,7 +499,7 @@ main {
     border-radius: 0.5rem;
     font-weight: 600;
     cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -386,6 +515,7 @@ main {
     opacity: 0.8;
 }
 
+/* Footer Section */
 footer {
     background-color: var(--card-background);
     padding: 3rem 1rem 1rem;
@@ -416,7 +546,7 @@ footer {
 .footer-section a {
     text-decoration: none;
     color: var(--text-color);
-    transition: color 0.3s ease;
+    transition: color var(--transition-speed) ease;
 }
 
 .footer-section a:hover {
@@ -572,7 +702,7 @@ footer {
 }
 
 .category-header {
-    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     color: white;
     padding: 4rem 2rem;
     text-align: center;
@@ -633,7 +763,7 @@ footer {
     background: none;
     color: var(--text-color);
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all var(--transition-speed) ease;
 }
 
 .filter-button:hover {
@@ -688,7 +818,7 @@ footer {
 }
 
 .category-newsletter {
-    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     padding: 4rem 2rem;
     margin: 4rem auto;
     border-radius: 2rem;
@@ -697,7 +827,7 @@ footer {
     text-align: center;
 }
 
-/* Mobile Navigation */
+/* Media Queries for Responsive Design */
 @media screen and (max-width: 768px) {
     .mobile-menu-btn {
         display: block;
@@ -710,12 +840,11 @@ footer {
         left: 0;
         right: 0;
         background: var(--nav-background);
-        backdrop-filter: blur(10px);
         padding: 1rem;
         flex-direction: column;
         align-items: flex-start;
         gap: 0.5rem;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        box-shadow: var(--menu-shadow);
     }
 
     .nav-links.active {
@@ -731,7 +860,7 @@ footer {
         padding: 0.75rem 1rem;
         color: var(--text-color);
         text-decoration: none;
-        transition: color 0.3s ease;
+        transition: color var(--transition-speed) ease;
         font-weight: 500;
     }
 
@@ -762,145 +891,6 @@ footer {
     }
 }
 
-.mobile-menu-btn {
-    display: none;
-    background: none;
-    border: none;
-    color: var(--primary-color);
-    font-size: 1.8rem;
-    cursor: pointer;
-    padding: 0.5rem;
-    margin-right: 1rem;
-    transition: color 0.3s ease;
-}
-
-.mobile-menu-btn:hover {
-    color: var(--secondary-color);
-}
-
-/* Dropdown styles */
-.dropdown {
-    position: relative;
-}
-
-.dropdown-trigger {
-    display: flex;
-    align-items: center;
-    gap: 0.25rem;
-}
-
-.dropdown-trigger::after {
-    content: '\f107';
-    font-family: 'Font Awesome 5 Free';
-    font-weight: 900;
-    transition: transform 0.3s ease;
-}
-
-.dropdown.active .dropdown-trigger::after {
-    transform: rotate(180deg);
-}
-
-.dropdown-menu {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background: var(--card-background);
-    min-width: 200px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    border-radius: 0.5rem;
-    padding: 0.5rem 0;
-    z-index: 1000;
-}
-
-.dropdown.active .dropdown-menu {
-    display: block;
-}
-
-.dropdown-menu li {
-    list-style: none;
-}
-
-.dropdown-menu a {
-    display: block;
-    padding: 0.75rem 1rem;
-    color: var(--text-color);
-    text-decoration: none;
-    transition: all 0.2s ease;
-}
-
-.dropdown-menu a:hover {
-    background-color: var(--primary-color);
-    color: white;
-}
-
-/* Media Queries for Responsive Design */
-@media screen and (max-width: 768px) {
-    .mobile-menu-btn {
-        display: block;
-    }
-
-    .nav-links {
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background-color: var(--card-background);
-        flex-direction: column;
-        padding: 1rem;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-
-    .nav-links.active {
-        display: flex;
-    }
-
-    .nav-links li {
-        width: 100%;
-    }
-
-    .dropdown-menu {
-        position: static;
-        box-shadow: none;
-        width: 100%;
-        padding-left: 1rem;
-    }
-
-    .hero-content {
-        padding: 2rem 1rem;
-    }
-
-    .hero h1 {
-        font-size: 2rem;
-    }
-
-    .featured-reviews .card-grid {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-        padding: 1rem;
-    }
-
-    .newsletter-content {
-        padding: 2rem 1rem;
-    }
-
-    .footer-content {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-        padding: 2rem 1rem;
-    }
-
-    .review-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .product-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-/* Tablet Responsive Design */
 @media screen and (min-width: 769px) and (max-width: 1024px) {
     .featured-reviews .card-grid {
         grid-template-columns: repeat(2, 1fr);

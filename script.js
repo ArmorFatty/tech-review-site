@@ -1,52 +1,93 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Mobile menu and dropdown functionality
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
     const navLinks = document.querySelector('.nav-links');
     const dropdowns = document.querySelectorAll('.dropdown');
 
-    // Toggle mobile menu
+    // Mobile Menu Toggle
     if (mobileMenuBtn) {
         mobileMenuBtn.addEventListener('click', (e) => {
             e.stopPropagation();
+            const isExpanded = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
+            mobileMenuBtn.setAttribute('aria-expanded', !isExpanded);
             navLinks.classList.toggle('active');
-            mobileMenuBtn.querySelector('i').classList.toggle('fa-bars');
-            mobileMenuBtn.querySelector('i').classList.toggle('fa-times');
+            
+            // Toggle icon
+            const icon = mobileMenuBtn.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
         });
     }
 
-    // Handle dropdowns
+    // Dropdown Functionality
     dropdowns.forEach(dropdown => {
         const trigger = dropdown.querySelector('.dropdown-trigger');
+        const menu = dropdown.querySelector('.dropdown-menu');
         
-        if (trigger) {
+        if (trigger && menu) {
+            // Click handler
             trigger.addEventListener('click', (e) => {
                 e.preventDefault();
                 e.stopPropagation();
                 
-                const isActive = dropdown.classList.contains('active');
+                const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
                 
-                // Close all dropdowns
-                dropdowns.forEach(d => d.classList.remove('active'));
+                // Close other dropdowns
+                dropdowns.forEach(other => {
+                    if (other !== dropdown && other.classList.contains('active')) {
+                        other.classList.remove('active');
+                        other.querySelector('.dropdown-trigger').setAttribute('aria-expanded', 'false');
+                    }
+                });
                 
-                // Toggle clicked dropdown
-                if (!isActive) {
-                    dropdown.classList.add('active');
+                // Toggle current dropdown
+                dropdown.classList.toggle('active');
+                trigger.setAttribute('aria-expanded', !isExpanded);
+            });
+
+            // Keyboard navigation
+            menu.addEventListener('keydown', (e) => {
+                const items = menu.querySelectorAll('[role="menuitem"]');
+                const currentIndex = Array.from(items).indexOf(document.activeElement);
+
+                switch (e.key) {
+                    case 'ArrowUp':
+                        e.preventDefault();
+                        items[currentIndex > 0 ? currentIndex - 1 : items.length - 1].focus();
+                        break;
+                    case 'ArrowDown':
+                        e.preventDefault();
+                        items[currentIndex < items.length - 1 ? currentIndex + 1 : 0].focus();
+                        break;
+                    case 'Escape':
+                        e.preventDefault();
+                        dropdown.classList.remove('active');
+                        trigger.setAttribute('aria-expanded', 'false');
+                        trigger.focus();
+                        break;
                 }
             });
         }
     });
 
-    // Close menu when clicking outside
+    // Close menus when clicking outside
     document.addEventListener('click', (e) => {
-        const isClickInsideNav = e.target.closest('nav');
-        if (!isClickInsideNav) {
-            navLinks.classList.remove('active');
-            dropdowns.forEach(dropdown => dropdown.classList.remove('active'));
-            if (mobileMenuBtn) {
+        if (!e.target.closest('nav')) {
+            // Close mobile menu
+            if (navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+                mobileMenuBtn.setAttribute('aria-expanded', 'false');
                 const icon = mobileMenuBtn.querySelector('i');
                 icon.classList.remove('fa-times');
                 icon.classList.add('fa-bars');
             }
+            
+            // Close dropdowns
+            dropdowns.forEach(dropdown => {
+                if (dropdown.classList.contains('active')) {
+                    dropdown.classList.remove('active');
+                    dropdown.querySelector('.dropdown-trigger').setAttribute('aria-expanded', 'false');
+                }
+            });
         }
     });
 

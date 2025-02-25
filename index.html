@@ -11,25 +11,27 @@
     <header>
         <nav>
             <div class="logo">TechReview Hub</div>
-            <button class="mobile-menu-btn" aria-label="Toggle menu">
-                <i class="fas fa-bars"></i>
+            <button class="mobile-menu-btn" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links">
+                <i class="fas fa-bars" aria-hidden="true"></i>
             </button>
-            <ul class="nav-links">
-                <li><a href="#" class="active">Home</a></li>
-                <li><a href="#">Reviews</a></li>
+            <ul class="nav-links" id="nav-links" role="navigation">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="#reviews">Reviews</a></li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-trigger">Categories</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="categories/laptops/index.html">Laptops</a></li>
-                        <li><a href="categories/tvs/index.html">TVs</a></li>
-                        <li><a href="categories/soundbars/index.html">Soundbars</a></li>
-                        <li><a href="categories/monitors/index.html">Monitors</a></li>
-                        <li><a href="categories/headphones/index.html">Headphones</a></li>
-                        <li><a href="categories/gaming/index.html">Gaming</a></li>
-                        <li><a href="categories/smart-home/index.html">Smart Home</a></li>
+                    <button class="dropdown-trigger" aria-expanded="false" aria-haspopup="true">
+                        Categories <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li role="none"><a href="categories/laptops/index.html" role="menuitem">Laptops</a></li>
+                        <li role="none"><a href="categories/tvs/index.html" role="menuitem">TVs</a></li>
+                        <li role="none"><a href="categories/soundbars/index.html" role="menuitem">Soundbars</a></li>
+                        <li role="none"><a href="categories/monitors/index.html" role="menuitem">Monitors</a></li>
+                        <li role="none"><a href="categories/headphones/index.html" role="menuitem">Headphones</a></li>
+                        <li role="none"><a href="categories/gaming/index.html" role="menuitem">Gaming</a></li>
+                        <li role="none"><a href="categories/smart-home/index.html" role="menuitem">Smart Home</a></li>
                     </ul>
                 </li>
-                <li><a href="#">About</a></li>
+                <li><a href="#about">About</a></li>
             </ul>
         </nav>
     </header>
