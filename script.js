@@ -1,15 +1,16 @@
 document.addEventListener('DOMContentLoaded', () => {
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const navContainer = document.querySelector('.nav-container');
     const navLinks = document.querySelector('.nav-links');
     const dropdowns = document.querySelectorAll('.dropdown');
 
     // Mobile Menu Toggle
-    if (mobileMenuBtn) {
+    if (mobileMenuBtn && navContainer) {
         mobileMenuBtn.addEventListener('click', (e) => {
             e.stopPropagation();
             const isExpanded = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
             mobileMenuBtn.setAttribute('aria-expanded', !isExpanded);
-            navLinks.classList.toggle('active');
+            navContainer.classList.toggle('active');
             
             // Toggle icon
             const icon = mobileMenuBtn.querySelector('i');
@@ -73,8 +74,8 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('click', (e) => {
         if (!e.target.closest('nav')) {
             // Close mobile menu
-            if (navLinks.classList.contains('active')) {
-                navLinks.classList.remove('active');
+            if (navContainer.classList.contains('active')) {
+                navContainer.classList.remove('active');
                 mobileMenuBtn.setAttribute('aria-expanded', 'false');
                 const icon = mobileMenuBtn.querySelector('i');
                 icon.classList.remove('fa-times');

@@ -167,33 +167,34 @@ nav {
     color: white;
 }
 
-/* Mobile Styles */
+/* Media Queries for Mobile */
 @media screen and (max-width: 768px) {
     .mobile-menu-btn {
         display: block;
+        z-index: 1001;
+    }
+
+    .nav-container {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        max-width: 300px;
+        height: 100vh;
+        background: var(--nav-background);
+        padding: 5rem 1rem 1rem;
+        transition: right var(--transition-speed) ease;
+        box-shadow: var(--menu-shadow);
+    }
+
+    .nav-container.active {
+        right: 0;
     }
 
     .nav-links {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background: var(--nav-background);
-        padding: 1rem;
         flex-direction: column;
-        align-items: stretch;
-        gap: 0.5rem;
-        box-shadow: var(--menu-shadow);
-        opacity: 0;
-        visibility: hidden;
-        transform: translateY(-10px);
-        transition: all var(--transition-speed) ease;
-    }
-
-    .nav-links.active {
-        opacity: 1;
-        visibility: visible;
-        transform: translateY(0);
+        align-items: flex-start;
+        gap: 1rem;
     }
 
     .nav-links li {
@@ -202,33 +203,28 @@ nav {
 
     .nav-links a {
         display: block;
-        padding: 0.75rem 1rem;
+        padding: 0.8rem;
+        width: 100%;
+    }
+
+    /* Dropdown adjustments for mobile */
+    .dropdown-menu {
+        position: static;
+        background: none;
+        box-shadow: none;
+        padding-left: 1rem;
+        display: none;
+    }
+
+    .dropdown.active .dropdown-menu {
+        display: block;
     }
 
     .dropdown-trigger {
         width: 100%;
+        display: flex;
         justify-content: space-between;
-        padding: 0.75rem 1rem;
-    }
-
-    .dropdown-menu {
-        position: static;
-        box-shadow: none;
-        background: transparent;
-        min-width: auto;
-        padding-left: 1.5rem;
-        transform: none;
-        transition: opacity var(--transition-speed) ease;
-    }
-
-    .dropdown-menu a {
-        padding: 0.5rem 1rem;
-    }
-
-    .dropdown-menu a:hover,
-    .dropdown-menu a:focus {
-        background-color: transparent;
-        color: var(--primary-color);
+        align-items: center;
     }
 }
 
