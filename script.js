@@ -1,20 +1,20 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Mobile menu functionality
+    // Mobile menu and dropdown functionality
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
     const navLinks = document.querySelector('.nav-links');
     const dropdowns = document.querySelectorAll('.dropdown');
 
+    // Toggle mobile menu
     if (mobileMenuBtn) {
         mobileMenuBtn.addEventListener('click', (e) => {
             e.stopPropagation();
             navLinks.classList.toggle('active');
-            const icon = mobileMenuBtn.querySelector('i');
-            icon.classList.toggle('fa-bars');
-            icon.classList.toggle('fa-times');
+            mobileMenuBtn.querySelector('i').classList.toggle('fa-bars');
+            mobileMenuBtn.querySelector('i').classList.toggle('fa-times');
         });
     }
 
-    // Dropdown functionality
+    // Handle dropdowns
     dropdowns.forEach(dropdown => {
         const trigger = dropdown.querySelector('.dropdown-trigger');
         
@@ -23,30 +23,30 @@ document.addEventListener('DOMContentLoaded', () => {
                 e.preventDefault();
                 e.stopPropagation();
                 
-                // Close other dropdowns
-                dropdowns.forEach(other => {
-                    if (other !== dropdown && other.classList.contains('active')) {
-                        other.classList.remove('active');
-                    }
-                });
+                const isActive = dropdown.classList.contains('active');
                 
-                // Toggle current dropdown
-                dropdown.classList.toggle('active');
+                // Close all dropdowns
+                dropdowns.forEach(d => d.classList.remove('active'));
+                
+                // Toggle clicked dropdown
+                if (!isActive) {
+                    dropdown.classList.add('active');
+                }
             });
         }
     });
 
-    // Close mobile menu and dropdowns when clicking outside
+    // Close menu when clicking outside
     document.addEventListener('click', (e) => {
-        if (!e.target.closest('nav')) {
+        const isClickInsideNav = e.target.closest('nav');
+        if (!isClickInsideNav) {
             navLinks.classList.remove('active');
-            dropdowns.forEach(dropdown => {
-                dropdown.classList.remove('active');
-            });
-            
-            const icon = mobileMenuBtn.querySelector('i');
-            icon.classList.remove('fa-times');
-            icon.classList.add('fa-bars');
+            dropdowns.forEach(dropdown => dropdown.classList.remove('active'));
+            if (mobileMenuBtn) {
+                const icon = mobileMenuBtn.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
         }
     });
 
